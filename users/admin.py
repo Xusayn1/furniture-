@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
+from django.utils.translation import gettext_lazy as _
 from users.models import CustomUser
 
 
@@ -15,8 +15,8 @@ class CustomUserAdmin(UserAdmin):
     # Field layout for the edit/detail page
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('full_name', 'phone_number')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Personal info'), {'fields': ('full_name', 'phone_number')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
     )
 
     # Field layout for the "Add user" page

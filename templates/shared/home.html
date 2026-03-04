@@ -1,5 +1,6 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %}Home{% endblock %}
 
 {% block id %}id="home"{% endblock %}
@@ -564,7 +565,8 @@
                                                 <div class="policy-item">
                                                     <div class="policy-content iconpolicy1">
                                                         <img src="{% static 'img/home/home' %}1-policy.png" alt="img">
-                                                        <div class="policy-name mb-5">FREE DELIVERY FROM $ 250</div>
+
+                                                        <div class="policy-name mb-5">{% trans 'FREE DELIVERY FROM $ 250' %}</div>
                                                         <div class="policy-des">Lorem ipsum dolor amet consectetur</div>
                                                     </div>
                                                 </div>

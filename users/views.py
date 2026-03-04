@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.encoding import force_str, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-
+from django.utils.translation import gettext_lazy as _
 from users.forms import CustomUserCreationForm, CustomAuthenticationForm
 from users.utils import email_verification_token
 
@@ -39,7 +39,7 @@ def register_view(request):
             })
             thread.start()
 
-            text = "We sent a confirmation link to your email, please verify it"
+            text = _("We sent a confirmation link to your email, please verify it") 
             messages.success(request, text)
             return redirect('users:register')
         else:
@@ -68,7 +68,7 @@ def verify_email_view(request, uidb64, token):
         login(request, user)
         return redirect('shared:home')
     else:
-        messages.error(request, "Something went wrong, please try again later")
+        messages.error(request, _("Something went wrong, please try again later"))
         return render(request, 'users/login.html')
 
 

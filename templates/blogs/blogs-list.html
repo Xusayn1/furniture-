@@ -1,7 +1,8 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Blogs{% endblock %}
+{% block title %}{% trans 'Blogs' %}{% endblock %}
 
 {% block id %}id="blog-list-sidebar-left"{% endblock %}
 {% block class %}class="blog"{% endblock %}

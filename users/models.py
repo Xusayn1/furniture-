@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from django.utils.translation import gettext_lazy as _
 from shared.models import BaseModel
 
 # Create your models here.
@@ -15,7 +15,7 @@ class CustomUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            full_name=full_name,
+            full_name=full_name, 
             phone_number=phone_number
         )
         user.set_password(password)
@@ -32,7 +32,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin, BaseModel):
     email = models.EmailField(unique=True)
-    full_name = models.CharField(max_length=128)
+    full_name = models.CharField(max_length=128, verbose_name=_('full name'))
     phone_number = models.CharField(max_length=13, blank=True, null=True, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -48,5 +48,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, BaseModel):
 
     class Meta:
         db_table = 'users'
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')

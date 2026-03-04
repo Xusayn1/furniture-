@@ -1,13 +1,13 @@
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 from shared.models import BaseModel
 
 
 class Author(BaseModel):
-    full_name = models.CharField(max_length=128)
-    image = models.ImageField(upload_to='authors/')
-    about = models.CharField(max_length=255)
-    professions = models.CharField(max_length=128)
+    full_name = models.CharField(max_length=128, verbose_name=_('full name'))
+    image = models.ImageField(upload_to='authors/', verbose_name=_('image'))
+    about = models.CharField(max_length=255, verbose_name=_('about'))
+    professions = models.CharField(max_length=128, verbose_name=_('professions'))
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -15,12 +15,12 @@ class Author(BaseModel):
 
     class Meta:
         db_table = 'authors'
-        verbose_name = 'author'
-        verbose_name_plural = 'authors'
+        verbose_name = _('author')
+        verbose_name_plural = _('authors')
 
 
 class Category(BaseModel):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, verbose_name=_('title'))
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -33,32 +33,32 @@ class Category(BaseModel):
 
     class Meta:
         db_table = 'categories'
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
 
 
 class Tag(BaseModel):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, verbose_name=_('title'))
 
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = 'tags'
-        verbose_name = 'tag'
-        verbose_name_plural = 'tags'
+        verbose_name = _('tag')
+        verbose_name_plural = _('tags')
 
 
 class BlogStatus(models.TextChoices):
-    PUBLISHED = "PUBLISHED", "Published"
-    DRAFT = "DRAFT", "Draft"
-    DELETED = "DELETED", "Deleted"
+    PUBLISHED = "PUBLISHED", _("Published")
+    DRAFT = "DRAFT", _("Draft")
+    DELETED = "DELETED", _("Deleted")
 
 
 class Blog(BaseModel):
-    title = models.CharField(max_length=128)
-    short_description = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='blogs/', null=True, blank=True)
+    title = models.CharField(max_length=128, verbose_name=_('title'))
+    short_description = models.CharField(max_length=255, verbose_name=_('short description'))
+    image = models.ImageField(upload_to='blogs/', null=True, blank=True, verbose_name=_('image'))
 
     # this will change into rich text uploading field
     long_description = models.TextField()
@@ -84,5 +84,5 @@ class Blog(BaseModel):
 
     class Meta:
         db_table = 'blogs'
-        verbose_name = 'blog'
-        verbose_name_plural = 'blogs'
+        verbose_name = _('blog')
+        verbose_name_plural = _('blogs')
